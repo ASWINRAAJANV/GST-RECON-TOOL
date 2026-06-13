@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GST Reconciliation Tool — by CA Aswin Raajan V</title>
+<title>GST Reconciliation Tool — by CA Aswin Raajan V · CA N Venkateswaran</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -51,7 +51,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 11px; font-weight: 700; letter-spacing: .07em;
   text-transform: uppercase; padding: 4px 11px; border-radius: 40px;
 }
-.tag-brown   { background: #FEF0E7; color: var(--saffron); }
+.tag-brown   { background: #FEF0E7; color: var(--saffron); white-space: normal; line-height: 1.5; font-style: italic; text-transform: none; letter-spacing: 0; font-size: 13px; font-weight: 600; }
 .tag-green   { background: var(--green-lt); color: var(--green); }
 .tag-amber   { background: var(--amber-lt); color: var(--brown-mid); }
 
@@ -457,8 +457,105 @@ footer {
 }
 
 /* ── RESPONSIVE ───────────────────────────── */
+/* ── REAL UI MOCKUP ───────────────────────── */
+.ui-preview {
+  background: #FFF8F0;
+  border: 1.5px solid #E8D5C0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.ui-titlebar {
+  background: #F5E6D3;
+  border-bottom: 1px solid #E8D5C0;
+  padding: 9px 14px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.ui-titlebar-left {
+  font-size: 12px; font-weight: 800; color: var(--brown);
+}
+.ui-titlebar-right {
+  font-size: 11px; font-weight: 700; color: var(--ink-muted);
+}
+.ui-tabs {
+  display: flex; border-bottom: 1px solid #E8D5C0;
+  background: #FAF0E6;
+}
+.ui-tab {
+  padding: 7px 14px; font-size: 11.5px; font-weight: 700;
+  color: var(--ink-muted); border: none; background: transparent;
+  cursor: pointer; border-bottom: 2px solid transparent;
+  font-family: inherit; transition: all .15s;
+}
+.ui-tab.active { color: var(--saffron); border-bottom-color: var(--saffron); background: #FFF8F0; }
+.ui-tab:hover:not(.active) { color: var(--brown); background: #FDF3E7; }
+.ui-screen { padding: 14px 16px; }
+.ui-screen-label, .ui-scheme-label {
+  font-size: 9.5px; font-weight: 800; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--saffron);
+  margin-bottom: 8px;
+}
+.ui-menu-card {
+  border: 1px solid #E8D5C0; border-radius: 8px;
+  padding: 10px 14px; margin-bottom: 7px;
+  background: #fff; cursor: pointer;
+  transition: border-color .15s;
+}
+.ui-menu-highlight { background: #FFF8F0; }
+.ui-menu-highlight:hover { border-color: var(--saffron); }
+.ui-menu-title { font-size: 13px; font-weight: 700; color: var(--brown); }
+.ui-menu-sub   { font-size: 11px; color: var(--saffron); margin-top: 2px; }
+.ui-menu-row   { display: flex; gap: 8px; margin-bottom: 7px; }
+.ui-menu-btn {
+  flex: 1; border: 1px solid #E8D5C0; border-radius: 8px;
+  padding: 9px 12px; font-size: 12px; font-weight: 600;
+  color: var(--ink-soft); text-align: center; background: #fff;
+}
+.ui-license {
+  display: flex; justify-content: space-between; align-items: center;
+  background: #FFF8F0; border: 1px solid #E8D5C0;
+  border-radius: 8px; padding: 9px 14px; margin-top: 7px;
+  font-size: 12px;
+}
+.ui-run-all-btn {
+  background: var(--saffron); color: #fff;
+  font-size: 12px; font-weight: 700;
+  padding: 9px 14px; border-radius: 8px;
+  text-align: center; margin-bottom: 7px;
+  cursor: pointer;
+}
+.ui-run-comp { margin-bottom: 0; }
+.ui-field-label {
+  font-size: 9.5px; font-weight: 800; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--saffron); margin-bottom: 7px;
+}
+.ui-field-row {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 6px;
+}
+.ui-field-name {
+  font-size: 11px; font-weight: 700; color: var(--brown);
+  white-space: nowrap; min-width: 110px;
+}
+.ui-field-val {
+  flex: 1; font-size: 10.5px; color: var(--ink-muted);
+  background: #fff; border: 1px solid #E8D5C0;
+  border-radius: 5px; padding: 4px 8px;
+  font-family: 'JetBrains Mono', monospace;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.ui-log {
+  background: #fff; border: 1px solid #E8D5C0;
+  border-radius: 6px; padding: 8px 10px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.ui-log-line { font-size: 10px; color: var(--ink-soft); line-height: 1.8; }
+.ui-log-amber { color: var(--saffron); font-weight: 700; }
+
 @media (max-width: 960px) {
   .hero-grid { grid-template-columns: 1fr; }
+  .ui-preview { display: none; }
   .terminal  { display: none; }
   .cap-grid  { grid-template-columns: 1fr 1fr; }
   .options-grid { grid-template-columns: 1fr; }
@@ -492,7 +589,7 @@ footer {
             <path d="M7 8h10M7 12h7M7 16h9"/>
           </svg>
         </div>
-        <span class="nav-name">GST <span>Recon Tool</span></span>
+        <span class="nav-name">GST <span>Reconciliation Tool</span></span>
       </div>
       <ul class="nav-links">
         <li><a href="#capabilities">Capabilities</a></li>
@@ -512,7 +609,7 @@ footer {
     <div class="hero-grid">
       <div>
         <div class="hero-eyebrow">
-          <span class="tag tag-brown">🇮🇳 Built for GST Professionals</span>
+          <span class="tag tag-brown">🇮🇳 Built for every professional who handles GST compliance — CA, CMA, CS, Tax Consultant, or Finance Team</span>
           <span class="tag tag-green">✓ DPDP Act 2023 Compliant</span>
         </div>
         <h1 class="hero-h1">GST Reconciliation Tool</h1>
@@ -535,8 +632,97 @@ footer {
         </div>
       </div>
 
-      <!-- Terminal mock -->
-      <div class="terminal">
+      <!-- REAL UI MOCKUP (recreated from actual tool screenshots) -->
+      <div class="ui-preview">
+        <div class="ui-titlebar">
+          <span class="ui-titlebar-left">GST Reconciliation Tool &nbsp;v1.0</span>
+          <span class="ui-titlebar-right">ABC ENTERPRISES PRIVATE LIMITED &nbsp;|&nbsp; FY 2025-26</span>
+        </div>
+        <div class="ui-tabs">
+          <button class="ui-tab active" onclick="switchTab(this,'tab-main')">Main Menu</button>
+          <button class="ui-tab" onclick="switchTab(this,'tab-mirrors')">Mirror Engines</button>
+          <button class="ui-tab" onclick="switchTab(this,'tab-run')">Run Engine</button>
+        </div>
+        <!-- SCREEN 1: Main Menu -->
+        <div class="ui-screen" id="tab-main">
+          <div class="ui-screen-label">MAIN MENU</div>
+          <div class="ui-menu-card ui-menu-highlight">
+            <div class="ui-menu-title">Mirror Engines</div>
+            <div class="ui-menu-sub">Consolidate GSTR-1 · GSTR-3B · GSTR-2B · CMP-08 · GSTR-4A</div>
+          </div>
+          <div class="ui-menu-card ui-menu-highlight">
+            <div class="ui-menu-title">Reconciliation Engine</div>
+            <div class="ui-menu-sub">Mirror Engines + GST Reconciliation</div>
+          </div>
+          <div class="ui-menu-row">
+            <div class="ui-menu-btn">Change Client / FY</div>
+            <div class="ui-menu-btn">Exit</div>
+          </div>
+          <div class="ui-menu-card" style="text-align:center;">
+            <div class="ui-menu-title">Help / About</div>
+          </div>
+          <div class="ui-license">
+            <span style="font-weight:700;color:var(--brown);">License</span>
+            <span style="color:var(--amber);font-weight:700;">Expires in 30 days (13 Jul 2026) •</span>
+          </div>
+        </div>
+        <!-- SCREEN 2: Mirror Engines -->
+        <div class="ui-screen" id="tab-mirrors" style="display:none;">
+          <div class="ui-scheme-label">REGULAR SCHEME</div>
+          <div class="ui-menu-card ui-menu-highlight">
+            <div class="ui-menu-title">GSTR-1 &nbsp;Mirror</div>
+            <div class="ui-menu-sub">PDFs → SUMMARY</div>
+          </div>
+          <div class="ui-menu-card ui-menu-highlight">
+            <div class="ui-menu-title">GSTR-3B &nbsp;Mirror</div>
+            <div class="ui-menu-sub">PDFs → OUTWARD + ITC + PAYMENT</div>
+          </div>
+          <div class="ui-menu-card ui-menu-highlight">
+            <div class="ui-menu-title">GSTR-2B &nbsp;Mirror</div>
+            <div class="ui-menu-sub">Excel → RECON_MASTER + RECON_INPUT</div>
+          </div>
+          <div class="ui-run-all-btn">Run All Regular →</div>
+          <div class="ui-scheme-label" style="margin-top:10px;">COMPOSITION SCHEME</div>
+          <div class="ui-menu-card ui-menu-highlight">
+            <div class="ui-menu-title">CMP-08 &nbsp;Mirror</div>
+            <div class="ui-menu-sub">PDFs → QUARTERLY SUMMARY + QUARTER_WISE</div>
+          </div>
+          <div class="ui-menu-card ui-menu-highlight">
+            <div class="ui-menu-title">GSTR-4A &nbsp;Mirror</div>
+            <div class="ui-menu-sub">Excel → RECON_MASTER + QUARTERLY_SUMMARY + PARTYWISE</div>
+          </div>
+          <div class="ui-run-all-btn ui-run-comp">Run All Composition →</div>
+        </div>
+        <!-- SCREEN 3: Run Engine -->
+        <div class="ui-screen" id="tab-run" style="display:none;padding:0;">
+          <div style="padding:14px 16px;border-bottom:1px solid #EDE3D8;">
+            <div class="ui-field-label">INPUT FOLDERS</div>
+            <div class="ui-field-row"><span class="ui-field-name">GSTR-1 PDF Folder</span><div class="ui-field-val">C:/…/ClientFolder/GSTR - 1</div></div>
+            <div class="ui-field-row"><span class="ui-field-name">GSTR-3B PDF Folder</span><div class="ui-field-val">C:/…/ClientFolder/GSTR - 3B</div></div>
+            <div class="ui-field-row"><span class="ui-field-name">GSTR-2B Excel Folder</span><div class="ui-field-val">C:/…/ClientFolder/GSTR - 2B</div></div>
+            <div class="ui-field-label" style="margin-top:8px;">OUTPUT FOLDER</div>
+            <div class="ui-field-row"><span class="ui-field-name">Save Output To</span><div class="ui-field-val">C:/…/ClientFolder/Outputs</div></div>
+          </div>
+          <div style="padding:10px 16px;background:#FAFAF9;border-bottom:1px solid #EDE3D8;">
+            <div class="ui-field-label">PROGRESS LOG</div>
+            <div class="ui-log">
+              <div class="ui-log-line">[23:04:31] &nbsp;Starting…</div>
+              <div class="ui-log-line ui-log-amber">[23:04:31] &nbsp;— Step 1/3 &nbsp;GSTR-1 Mirror Engine</div>
+              <div class="ui-log-line">[23:04:33] &nbsp;Input &nbsp;: C:/…/ClientFolder/GSTR - 1</div>
+              <div class="ui-log-line">[23:04:33] &nbsp;FY &nbsp;&nbsp;&nbsp;&nbsp;: FY 2025-26</div>
+              <div class="ui-log-line">[23:04:33] &nbsp;Output : C:/…/ClientFolder/Outputs</div>
+            </div>
+          </div>
+          <div style="padding:10px 16px;display:flex;justify-content:space-between;align-items:center;">
+            <div style="font-size:11px;color:var(--ink-muted);">○ Open Output Folder</div>
+            <div style="display:flex;gap:8px;">
+              <div style="background:#DC2626;color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:6px;">■ Abort</div>
+              <div style="background:#D97706;color:#fff;font-size:11px;font-weight:700;padding:5px 14px;border-radius:6px;opacity:.7;">⟳ Running…</div>
+            </div>
+          </div>
+        </div>
+      </div><!-- END REAL UI MOCKUP -->
+      <div class="terminal" style="display:none!important">
         <div class="term-bar">
           <div class="term-dot" style="background:#FF5F57"></div>
           <div class="term-dot" style="background:#FEBC2E"></div>
@@ -573,7 +759,7 @@ footer {
             <span class="ts-item" style="color:#FCD34D;">Pending: 4</span>
           </div>
         </div>
-      </div>
+      </div></div><!-- end hidden terminal -->
     </div>
   </div>
 </section>
@@ -687,16 +873,16 @@ footer {
         <div class="option-rec-badge">Recommended</div>
         <div class="option-letter">A</div>
         <div class="option-h">Reconciliation Engine</div>
-        <p class="option-p">Runs everything in a single session — all Mirror Engines followed by GST Reconciliation. Select your input folders, click Run, and get all six output files.</p>
+        <p class="option-p">Runs the complete Regular scheme pipeline in one go — GSTR-1, GSTR-3B and GSTR-2B Mirror Engines followed by the GST Reconciliation workbook. Select your input folders, click Run.</p>
         <div class="option-when">Best for</div>
-        <div class="option-use">Month-end or year-end processing when all return files are available</div>
+        <div class="option-use">Regular scheme taxpayers doing month-end or year-end processing when all return files are available</div>
       </div>
       <div class="option-card">
         <div class="option-letter">B</div>
-        <div class="option-h">Individual Mirror Engines</div>
-        <p class="option-p">Run only one return type — GSTR-1, GSTR-3B, GSTR-2B, CMP-08, or GSTR-4A — independently. Useful for adding a missing month without reprocessing everything.</p>
+        <div class="option-h">Mirror Engines</div>
+        <p class="option-p">Run engines individually or all-at-once per scheme. Regular scheme: GSTR-1, GSTR-3B, GSTR-2B. Composition scheme: CMP-08, GSTR-4A. Each scheme has its own "Run All" button.</p>
         <div class="option-when">Best for</div>
-        <div class="option-use">Re-running one engine after adding a missing month's PDF or correcting a source file</div>
+        <div class="option-use">Composition dealers, or re-running one engine after adding a missing month without reprocessing everything</div>
       </div>
       <div class="option-card">
         <div class="option-letter">C</div>
@@ -795,8 +981,8 @@ footer {
   <div class="container">
     <div class="section-head center">
       <div class="section-eyebrow"><span class="tag tag-green">Output Files</span></div>
-      <h2 class="section-h2">Six workbooks. Every figure explained.</h2>
-      <p class="section-sub">Every successful Reconciliation Engine run produces six Excel workbooks, each named with the FY prefix and GSTIN.</p>
+      <h2 class="section-h2">Structured workbooks.<br>Every figure explained.</h2>
+      <p class="section-sub">Each engine produces its own consolidated Excel workbook. The Reconciliation Engine (Regular scheme) additionally generates the GST Recon workbook. Run engines individually or all-at-once per scheme.</p>
     </div>
     <table class="output-table">
       <thead>
@@ -973,86 +1159,13 @@ footer {
   </div>
 </section>
 
-<!-- ── COMMON ERRORS ── -->
-<section class="section section-alt">
-  <div class="container">
-    <div class="section-head center">
-      <div class="section-eyebrow"><span class="tag tag-amber">Troubleshooting</span></div>
-      <h2 class="section-h2">Common errors & fixes.</h2>
-      <p class="section-sub">If your issue isn't listed, contact support with a screenshot and the log file from <span class="mono" style="font-size:13px;background:var(--surface-3);padding:2px 6px;border-radius:4px;">C:\Program Files\GST Recon Tool\logs\</span></p>
-    </div>
-    <div class="error-list">
-      <div class="error-card">
-        <div>
-          <div class="error-label err">⚠ Error</div>
-          <div class="error-text">"Windows protected your PC" on double-clicking setup</div>
-        </div>
-        <div>
-          <div class="error-label fix">✓ Fix</div>
-          <div class="error-text">Click <strong>More info</strong> then <strong>Run anyway</strong>. The warning appears because the installer is not code-signed — the file is safe.</div>
-        </div>
-      </div>
-      <div class="error-card">
-        <div>
-          <div class="error-label err">⚠ Error</div>
-          <div class="error-text">Tool does not open after clicking shortcut</div>
-        </div>
-        <div>
-          <div class="error-label fix">✓ Fix</div>
-          <div class="error-text">Right-click shortcut → <strong>Run as Administrator</strong>. Or add an antivirus exclusion for <span class="mono" style="font-size:12px;">C:\Program Files\GST Recon Tool\</span></div>
-        </div>
-      </div>
-      <div class="error-card">
-        <div>
-          <div class="error-label err">⚠ Error</div>
-          <div class="error-text">"Mixed FY detected" in progress log</div>
-        </div>
-        <div>
-          <div class="error-label fix">✓ Fix</div>
-          <div class="error-text">Your input folder contains files from more than one Financial Year. Create separate folders per FY and re-run.</div>
-        </div>
-      </div>
-      <div class="error-card">
-        <div>
-          <div class="error-label err">⚠ Error</div>
-          <div class="error-text">Output Excel cannot be opened or shows corrupt</div>
-        </div>
-        <div>
-          <div class="error-label fix">✓ Fix</div>
-          <div class="error-text">The file was open in Excel when the tool tried to write it. Close the file in Excel and click Run again.</div>
-        </div>
-      </div>
-      <div class="error-card">
-        <div>
-          <div class="error-label err">⚠ Error</div>
-          <div class="error-text">"Permission denied" when saving output</div>
-        </div>
-        <div>
-          <div class="error-label fix">✓ Fix</div>
-          <div class="error-text">The output folder is protected or OneDrive has locked the file. Choose an output folder on your Desktop or in Documents instead.</div>
-        </div>
-      </div>
-      <div class="error-card">
-        <div>
-          <div class="error-label err">⚠ Error</div>
-          <div class="error-text">Screen appears blank / all black on startup</div>
-        </div>
-        <div>
-          <div class="error-label fix">✓ Fix</div>
-          <div class="error-text">Display scaling mismatch on high-DPI monitors. Right-click shortcut → Properties → Compatibility → Change high DPI settings → Override → Application → OK.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ── DOWNLOAD ── -->
 <section class="download-section" id="download">
   <div class="container">
     <div class="download-inner">
       <p class="dl-eyebrow">Free Download · Windows 10 / 11 · Fully Offline</p>
       <h2 class="dl-h2">Start your first reconciliation<br>in under five minutes.</h2>
-      <p class="dl-sub">Download the installer, run it, select your files, click Run. Six workbooks. Every figure. Rupee by rupee.</p>
+      <p class="dl-sub">Download the installer, run it, point to your GST Portal files, click Run. Structured workbooks. Every figure. Rupee by rupee.</p>
       <div class="dl-actions">
         <!-- UPDATE: Replace href with your actual installer URL -->
         <a href="https://github.com/ASWINRAAJANV/GST-RECON-TOOL/releases/download/v1.0/GST_Recon_Tool_Setup.exe" class="btn btn-white">
@@ -1089,24 +1202,16 @@ footer {
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <p class="footer-copy">
-        <strong>GST Reconciliation Tool</strong> — Built by CA Aswin Raajan V · Mentored by CA N Venkateswaran
-      </p>
-      <div class="footer-links">
-        <a href="GST_Recon_Tool_User_Manual_v1_0.pdf" target="_blank">User Manual</a>
-        <a href="mailto:caaswinraajanv999@gmail.com">Report a Bug</a>
-        <a href="https://linkedin.com/in/aswinraajanv" target="_blank">LinkedIn</a>
-      </div>
-      <span class="dpdp-badge">🛡 DPDP Act 2023 Compliant</span>
-    </div>
-  </div>
-</footer>
+</body>
 
 <script>
+function switchTab(btn, targetId) {
+  btn.closest('.ui-preview').querySelectorAll('.ui-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  btn.closest('.ui-preview').querySelectorAll('.ui-screen').forEach(s => s.style.display = 'none');
+  document.getElementById(targetId).style.display = 'block';
+}
+
 function toggleFaq(btn) {
   const item = btn.closest('.faq-item');
   const isOpen = item.classList.contains('open');
@@ -1125,7 +1230,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.07 });
 
 document.querySelectorAll(
-  '.cap-card, .does-card, .option-card, .input-card, .spec-card, .error-card, .faq-item'
+  '.cap-card, .does-card, .option-card, .input-card, .spec-card, .faq-item'
 ).forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(16px)';
