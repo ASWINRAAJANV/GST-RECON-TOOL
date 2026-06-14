@@ -583,11 +583,8 @@ footer {
   <div class="container">
     <div class="nav-inner">
       <div class="nav-brand">
-        <div class="nav-logo-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="3"/>
-            <path d="M7 8h10M7 12h7M7 16h9"/>
-          </svg>
+        <div class="nav-logo-box" style="background:transparent;padding:0;overflow:hidden;">
+          <img src="data:image/png;base64,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" alt="GST Recon Tool Icon" style="width:34px;height:34px;border-radius:8px;display:block;">
         </div>
         <span class="nav-name">GST <span>Reconciliation Tool</span></span>
       </div>
@@ -635,7 +632,7 @@ footer {
       <!-- REAL UI MOCKUP (recreated from actual tool screenshots) -->
       <div class="ui-preview">
         <div class="ui-titlebar">
-          <span class="ui-titlebar-left">GST Reconciliation Tool &nbsp;v1.0</span>
+          <span class="ui-titlebar-left">GST Reconciliation Tool</span>
           <span class="ui-titlebar-right">ABC ENTERPRISES PRIVATE LIMITED &nbsp;|&nbsp; FY 2025-26</span>
         </div>
         <div class="ui-tabs">
@@ -661,10 +658,7 @@ footer {
           <div class="ui-menu-card" style="text-align:center;">
             <div class="ui-menu-title">Help / About</div>
           </div>
-          <div class="ui-license">
-            <span style="font-weight:700;color:var(--brown);">License</span>
-            <span style="color:var(--amber);font-weight:700;">Expires in 30 days (13 Jul 2026) •</span>
-          </div>
+
         </div>
         <!-- SCREEN 2: Mirror Engines -->
         <div class="ui-screen" id="tab-mirrors" style="display:none;">
