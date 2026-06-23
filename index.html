@@ -574,6 +574,50 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
 }
+
+/* ── DOWNLOAD REGISTRATION MODAL ──────────── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(28,25,23,.6); backdrop-filter: blur(4px);
+  display: none; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: var(--surface); border-radius: var(--radius-lg);
+  max-width: 460px; width: 100%; padding: 32px;
+  box-shadow: var(--shadow-lg); position: relative;
+  max-height: 90vh; overflow-y: auto;
+}
+.modal-close {
+  position: absolute; top: 14px; right: 14px;
+  background: none; border: none; font-size: 22px; line-height: 1;
+  cursor: pointer; color: var(--ink-muted); padding: 4px;
+}
+.modal-close:hover { color: var(--ink); }
+.modal-title { font-size: 21px; font-weight: 800; color: var(--brown); margin-bottom: 6px; }
+.modal-sub { font-size: 13.5px; color: var(--ink-soft); margin-bottom: 22px; line-height: 1.55; }
+.form-group { margin-bottom: 16px; }
+.form-label { display: block; font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.form-label .req { color: var(--saffron); margin-left: 2px; }
+.form-label .opt { color: var(--ink-muted); font-weight: 500; font-size: 11.5px; text-transform: none; }
+.form-input, .form-select {
+  width: 100%; padding: 11px 13px; border: 1.5px solid var(--border);
+  border-radius: var(--radius); font-family: inherit; font-size: 14px;
+  color: var(--ink); background: var(--surface);
+}
+.form-input:focus, .form-select:focus { outline: none; border-color: var(--saffron); }
+.form-input.field-error, .form-select.field-error { border-color: var(--red); }
+.form-error { font-size: 12px; color: var(--red); margin-top: 5px; display: none; }
+.form-error.show { display: block; }
+.form-checkbox-row { display: flex; gap: 10px; align-items: flex-start; }
+.form-checkbox-row input { margin-top: 3px; flex-shrink: 0; width: 16px; height: 16px; accent-color: var(--saffron); }
+.form-checkbox-row label { font-size: 12.5px; color: var(--ink-soft); line-height: 1.55; }
+.modal-submit { width: 100%; justify-content: center; margin-top: 6px; }
+.modal-submit:disabled { opacity: .6; cursor: not-allowed; }
+.modal-status { font-size: 13px; text-align: center; margin-top: 12px; display: none; color: var(--ink-soft); }
+.modal-status.show { display: block; }
+.modal-status.is-error { color: var(--red); }
 </style>
 </head>
 <body>
@@ -1161,10 +1205,10 @@ footer {
       <h2 class="dl-h2">Start your first reconciliation<br>in under five minutes.</h2>
       <p class="dl-sub">Download the installer, run it, point to your GST Portal files, click Run. Structured workbooks. Every figure. Rupee by rupee.</p>
       <div class="dl-actions">
-        <!-- UPDATE: Replace href with your actual installer URL -->
-        <a href="https://github.com/ASWINRAAJANV/GST-RECON-TOOL/releases/download/Beta/GST_Reconciliation_Tool_Setup.exe" class="btn btn-white">
+        <!-- Opens registration modal instead of downloading directly -->
+        <button type="button" class="btn btn-white" onclick="openDownloadModal()">
           ⬇ Download GST Recon Tool - Beta Version
-        </a>
+        </button>
         <a href="https://github.com/ASWINRAAJANV/GST-RECON-TOOL/blob/main/Setup%20and%20User%20Manual.pdf" class="btn btn-outline-w" target="_blank">
           📄 Setup & User Manual (PDF)
         </a>
@@ -1196,7 +1240,64 @@ footer {
   </div>
 </section>
 
-</body>
+<!-- ── REGISTRATION MODAL ── -->
+<div class="modal-overlay" id="downloadModalOverlay" onclick="if(event.target===this) closeDownloadModal()">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button type="button" class="modal-close" onclick="closeDownloadModal()" aria-label="Close">×</button>
+    <div class="modal-title" id="modalTitle">Quick details before you download</div>
+    <p class="modal-sub">Free, forever. We just need a few details to send you release notes, bug-fix updates and new GST module announcements.</p>
+
+    <form id="downloadForm" novalidate>
+      <div class="form-group">
+        <label class="form-label" for="dlName">Full Name <span class="req">*</span></label>
+        <input type="text" id="dlName" class="form-input" placeholder="e.g. Aswin Raajan" autocomplete="name">
+        <div class="form-error" id="errName">Please enter your full name.</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="dlQualification">Qualification <span class="req">*</span></label>
+        <select id="dlQualification" class="form-select" onchange="toggleOtherQualification()">
+          <option value="" selected disabled>Select Qualification</option>
+          <option value="CA">Chartered Accountant (CA)</option>
+          <option value="CMA">Cost & Management Accountant (CMA)</option>
+          <option value="CS">Company Secretary (CS)</option>
+          <option value="Tax Practitioner">Tax Practitioner / Consultant</option>
+          <option value="Others">Others</option>
+        </select>
+        <div class="form-error" id="errQualification">Please select your qualification.</div>
+      </div>
+
+      <div class="form-group" id="otherQualificationGroup" style="display:none;">
+        <label class="form-label" for="dlQualificationOther">Please Specify Qualification <span class="req">*</span></label>
+        <input type="text" id="dlQualificationOther" class="form-input" placeholder="e.g. Advocate, MBA Finance">
+        <div class="form-error" id="errQualificationOther">Please specify your qualification.</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="dlMobile">Mobile Number <span class="opt">(optional)</span></label>
+        <input type="tel" id="dlMobile" class="form-input" placeholder="9876543210" inputmode="numeric" maxlength="10" autocomplete="tel">
+        <div class="form-error" id="errMobile">Enter a valid 10-digit mobile number, or leave it blank.</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="dlEmail">Email Address <span class="req">*</span></label>
+        <input type="email" id="dlEmail" class="form-input" placeholder="you@example.com" autocomplete="email">
+        <div class="form-error" id="errEmail">Please enter a valid email address.</div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-checkbox-row">
+          <input type="checkbox" id="dlConsent">
+          <label for="dlConsent">I consent to the collection and processing of my Name, Qualification, Mobile Number and Email Address for downloading the GST Reconciliation Tool, receiving product updates, release notes, bug-fix notifications and related communications in accordance with the Digital Personal Data Protection Act, 2023.</label>
+        </div>
+        <div class="form-error" id="errConsent">Consent is required to proceed with the download.</div>
+      </div>
+
+      <button type="submit" class="btn btn-primary modal-submit" id="dlSubmitBtn">⬇ Save & Download</button>
+      <div class="modal-status" id="dlStatus"></div>
+    </form>
+  </div>
+</div>
 
 <script>
 function switchTab(btn, targetId) {
@@ -1230,6 +1331,129 @@ document.querySelectorAll(
   el.style.transform = 'translateY(16px)';
   el.style.transition = 'opacity .4s ease, transform .4s ease';
   observer.observe(el);
+});
+
+/* ── DOWNLOAD REGISTRATION MODAL ─────────────────────────── */
+
+// ⚠️ REPLACE with your deployed Google Apps Script Web App URL (see Apps_Script_Code.gs)
+const GAS_ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbx7rRmGUyojmy6-iTtD2ExQr1lMky0PI4eLrVNuwtpyn7mnxM8hK0R7DSfQ9UHQMJRN/exec";
+
+// The actual installer file. Download starts automatically after the form is saved.
+const INSTALLER_URL = "https://github.com/ASWINRAAJANV/GST-RECON-TOOL/releases/download/Beta/GST_Reconciliation_Tool_Setup.exe";
+const TOOL_VERSION = "Beta";
+
+function openDownloadModal() {
+  document.getElementById('downloadModalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDownloadModal() {
+  document.getElementById('downloadModalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function toggleOtherQualification() {
+  const val = document.getElementById('dlQualification').value;
+  const group = document.getElementById('otherQualificationGroup');
+  group.style.display = (val === 'Others') ? 'block' : 'none';
+  if (val !== 'Others') {
+    document.getElementById('dlQualificationOther').value = '';
+    setFieldError('dlQualificationOther', 'errQualificationOther', false);
+  }
+}
+
+// Allow digits only in the mobile field, capped at 10 characters
+document.getElementById('dlMobile').addEventListener('input', function () {
+  this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
+});
+
+function setFieldError(inputId, errorId, show) {
+  const input = document.getElementById(inputId);
+  const error = document.getElementById(errorId);
+  if (input) input.classList.toggle('field-error', !!show);
+  if (error) error.classList.toggle('show', !!show);
+}
+
+function validateDownloadForm() {
+  let valid = true;
+
+  const name = document.getElementById('dlName').value.trim();
+  if (!name) { setFieldError('dlName', 'errName', true); valid = false; }
+  else setFieldError('dlName', 'errName', false);
+
+  const qualification = document.getElementById('dlQualification').value;
+  if (!qualification) { setFieldError('dlQualification', 'errQualification', true); valid = false; }
+  else setFieldError('dlQualification', 'errQualification', false);
+
+  if (qualification === 'Others') {
+    const other = document.getElementById('dlQualificationOther').value.trim();
+    if (!other) { setFieldError('dlQualificationOther', 'errQualificationOther', true); valid = false; }
+    else setFieldError('dlQualificationOther', 'errQualificationOther', false);
+  }
+
+  const mobile = document.getElementById('dlMobile').value.trim();
+  if (mobile && !/^[0-9]{10}$/.test(mobile)) { setFieldError('dlMobile', 'errMobile', true); valid = false; }
+  else setFieldError('dlMobile', 'errMobile', false);
+
+  const email = document.getElementById('dlEmail').value.trim();
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!emailOk) { setFieldError('dlEmail', 'errEmail', true); valid = false; }
+  else setFieldError('dlEmail', 'errEmail', false);
+
+  const consent = document.getElementById('dlConsent').checked;
+  if (!consent) { setFieldError('dlConsent', 'errConsent', true); valid = false; }
+  else setFieldError('dlConsent', 'errConsent', false);
+
+  return valid;
+}
+
+function getStoredQualification() {
+  const select = document.getElementById('dlQualification').value;
+  if (select === 'Others') return document.getElementById('dlQualificationOther').value.trim();
+  return select;
+}
+
+document.getElementById('downloadForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  if (!validateDownloadForm()) return;
+
+  const submitBtn = document.getElementById('dlSubmitBtn');
+  const status = document.getElementById('dlStatus');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Saving…';
+  status.classList.remove('show', 'is-error');
+
+  const payload = {
+    name: document.getElementById('dlName').value.trim(),
+    qualification: getStoredQualification(),
+    mobile: document.getElementById('dlMobile').value.trim(),
+    email: document.getElementById('dlEmail').value.trim(),
+    consent: true,
+    toolVersion: TOOL_VERSION,
+    downloadSource: 'Website'
+  };
+
+  // Apps Script Web Apps don't return CORS headers for fetch reads, so we fire the
+  // request with mode "no-cors" and proceed straight to the download once it's sent.
+  fetch(GAS_ENDPOINT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(payload)
+  })
+  .catch(() => { /* swallow network errors — download proceeds regardless */ })
+  .finally(() => {
+    status.textContent = 'Details saved. Your download is starting…';
+    status.classList.add('show');
+    setTimeout(() => {
+      window.location.href = INSTALLER_URL;
+      submitBtn.disabled = false;
+      submitBtn.textContent = '⬇ Save & Download';
+      closeDownloadModal();
+      document.getElementById('downloadForm').reset();
+      document.getElementById('otherQualificationGroup').style.display = 'none';
+    }, 700);
+  });
 });
 </script>
 </body>
